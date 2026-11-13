@@ -1,0 +1,9 @@
+{
+  "id": "dsh-git-graph",
+  "name": "DSH Git Graph",
+  "version": "0.1.0",
+  "minAppVersion": "1.5.0",
+  "description": "Git Graph pane for the vault repository.",
+  "author": "Si-xiyu",
+  "isDesktopOnly": true
+}

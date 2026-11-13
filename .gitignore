@@ -1,0 +1,9 @@
+﻿node_modules/
+dist/
+.test-vault/
+*.log
+*.tsbuildinfo
+
+# local release staging (CI creates its own)
+release/
+.worktrees/

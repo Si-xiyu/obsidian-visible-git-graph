@@ -1,0 +1,20 @@
+.dsh-git-graph-view {
+  padding: 0;
+  overflow: hidden;
+}
+
+.dsh-git-graph-view .dsh-git-graph-root {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+}
+
+.dsh-git-graph-loading {
+  flex: 0 0 auto;
+  padding: 16px;
+  font-size: 13px;
+  line-height: 1.6;
+  color: var(--text-muted);
+  user-select: text;
+}

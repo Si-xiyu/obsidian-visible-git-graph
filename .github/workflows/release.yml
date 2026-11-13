@@ -1,0 +1,121 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - '[0-9]*'
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: 'Existing tag to release (for example 0.1.0)'
+        required: true
+        type: string
+
+permissions:
+  contents: write
+
+concurrency:
+  group: release-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  release:
+    name: Build and publish
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    env:
+      RELEASE_TAG: ${{ github.event_name == 'workflow_dispatch' && github.event.inputs.tag || github.ref_name }}
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event_name == 'workflow_dispatch' && github.event.inputs.tag || github.ref }}
+          fetch-depth: 0
+
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: Install
+        run: npm ci
+
+      - name: Typecheck
+        run: npm run typecheck
+
+      - name: Test
+        run: npm test
+
+      - name: Build
+        run: npm run build
+
+      - name: Validate version and artifacts
+        id: meta
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          test -s manifest.json
+          test -s dist/main.js
+          test -s dist/styles.css
+          test -s versions.json
+
+          version="$(node -p "require('./manifest.json').version")"
+          # Obsidian looks up the release whose tag equals the manifest version, so a
+          # "v" prefix would make the plugin uninstallable. Compare the tag verbatim.
+          if [ "$version" != "$RELEASE_TAG" ]; then
+            echo "manifest version ($version) does not match tag ($RELEASE_TAG)" >&2
+            exit 1
+          fi
+
+          node -e "
+            const m = require('./manifest.json');
+            if (!m.id || !m.name || m.isDesktopOnly !== true) {
+              console.error('manifest.json must have id/name and isDesktopOnly=true');
+              process.exit(1);
+            }
+            const versions = require('./versions.json');
+            if (!versions[m.version]) {
+              console.error('versions.json has no entry for ' + m.version);
+              process.exit(1);
+            }
+          "
+
+          echo "version=$version" >> "$GITHUB_OUTPUT"
+          echo "Releasing version $version from tag $RELEASE_TAG"
+
+      - name: Stage release files
+        shell: bash
+        env:
+          VERSION: ${{ steps.meta.outputs.version }}
+        run: |
+          set -euo pipefail
+          mkdir -p release
+          cp manifest.json release/
+          cp dist/main.js release/
+          cp dist/styles.css release/
+          cp versions.json release/
+          (
+            cd release
+            python3 -c "import sys,zipfile; v=sys.argv[1]; z=zipfile.ZipFile(f'dsh-git-graph-{v}.zip','w',zipfile.ZIP_DEFLATED); [z.write(n) for n in ('manifest.json','main.js','styles.css')]; z.close()" "$VERSION"
+          )
+          ls -lh release
+
+      - name: Create GitHub release
+        env:
+          GH_TOKEN: ${{ github.token }}
+          VERSION: ${{ steps.meta.outputs.version }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          gh release create "$RELEASE_TAG" \
+            release/manifest.json \
+            release/main.js \
+            release/styles.css \
+            release/versions.json \
+            "release/dsh-git-graph-${VERSION}.zip" \
+            --title "DSH Git Graph $VERSION" \
+            --generate-notes \
+            --verify-tag
