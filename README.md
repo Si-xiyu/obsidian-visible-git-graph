@@ -49,8 +49,8 @@ npm run build
 2. 创建并推送标签：
 
    ```bash
-   git tag -a 0.2.0 -m "Visible Git Graph 0.2.0"
-   git push origin 0.2.0
+   git tag -a 0.2.1 -m "Visible Git Graph 0.2.1"
+   git push origin 0.2.1
    ```
 
 3. GitHub Actions 会依次执行 `npm ci`、`typecheck`、`test`、`build`，校验 tag 与 manifest 版本一致，

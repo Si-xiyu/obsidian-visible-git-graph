@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.2.1 — 2026-11-13
+
+### 修复
+
+- Release 标题和 zip 包名仍使用旧项目名，现改为 **Visible Git Graph** / `visible-git-graph-<version>.zip`。
+
 ## 0.2.0 — 2026-11-13
 
 ### 变更

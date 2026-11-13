@@ -76,8 +76,8 @@ uncommittedMark, maxWidth }`。
 1. `manifest.json`：
 
 ```json
-{ "id": "dsh-git-graph", "name": "DSH Git Graph", "version": "0.0.1",
-  "minAppVersion": "1.5.0", "description": "Git Graph pane for the vault repository.",
+{ "id": "visible-git-graph", "name": "Visible Git Graph", "version": "0.2.1",
+  "minAppVersion": "1.5.0", "description": "Show the vault repository's Git history as a commit graph.",
   "author": "Si-xiyu", "isDesktopOnly": true }
 ```
 
@@ -93,7 +93,7 @@ uncommittedMark, maxWidth }`。
    `addCommand({id:'open'})`；`src/view.ts` 继承 `ItemView`，`onOpen` 往 `contentEl` 挂 Vue 应用，
    `onClose` 卸载；先渲染一行 `loading…` 即可。
 6. 验收：`npm run build` 后 `dist/` 里有 `main.js`、`styles.css`；把 `manifest.json`+`main.js`+`styles.css`
-   放进测试 vault 的 `.obsidian/plugins/dsh-git-graph/` 能在面板区打开空白视图。
+   放进测试 vault 的 `.obsidian/plugins/visible-git-graph/` 能在面板区打开空白视图。
 
 ## Phase 1 — git 访问层（目标：能拿到提交与 refs，且全部有单测）
 
