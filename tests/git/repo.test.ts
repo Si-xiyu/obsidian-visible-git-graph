@@ -13,7 +13,7 @@ const BASE_DATE = 1_700_000_000;
 const tempDirs: string[] = [];
 
 /** Empty git config files keep the host's global/system configuration out of the tests. */
-const isolatedConfigDir = fs.mkdtempSync(path.join(os.tmpdir(), 'dsh-git-graph-config-'));
+const isolatedConfigDir = fs.mkdtempSync(path.join(os.tmpdir(), 'visible-git-graph-config-'));
 const emptyGitConfig = path.join(isolatedConfigDir, 'gitconfig');
 fs.writeFileSync(emptyGitConfig, '');
 
@@ -56,7 +56,7 @@ function dateEnv(seconds: number): NodeJS.ProcessEnv {
 }
 
 function initRepo(): string {
-  const dir = mkTempDir('dsh-git-graph-repo-');
+  const dir = mkTempDir('visible-git-graph-repo-');
   git(dir, ['init', '-b', 'main']);
   git(dir, ['config', 'user.name', 'Test User']);
   git(dir, ['config', 'user.email', 'test@example.com']);
@@ -109,19 +109,19 @@ describe('resolveRepoRoot', () => {
   });
 
   it('returns null outside any repository', async () => {
-    const dir = mkTempDir('dsh-git-graph-not-a-repo-');
+    const dir = mkTempDir('visible-git-graph-not-a-repo-');
     await expect(resolveRepoRoot(dir)).resolves.toBeNull();
   });
 
   it('propagates a missing git executable as ENOENT', async () => {
     const repo = initRepo();
-    await expect(resolveRepoRoot(repo, 'dsh-git-graph-no-such-git-executable')).rejects.toMatchObject({
+    await expect(resolveRepoRoot(repo, 'visible-git-graph-no-such-git-executable')).rejects.toMatchObject({
       code: 'ENOENT',
     });
   });
 
   it('propagates a spawn timeout as TIMEOUT', async () => {
-    const dir = mkTempDir('dsh-git-graph-timeout-');
+    const dir = mkTempDir('visible-git-graph-timeout-');
     // Node executes the extensionless file named `rev-parse` passed as argv[1].
     fs.writeFileSync(path.join(dir, 'rev-parse'), 'setTimeout(() => {}, 5000)');
 
@@ -214,7 +214,7 @@ describe('log', () => {
     git(repo, ['add', '--', 'a.txt']);
 
     // Put the message file inside .git so it does not show up as untracked.
-    const messageFile = path.join(repo, '.git', 'dsh-message.txt');
+    const messageFile = path.join(repo, '.git', 'visible-message.txt');
     fs.writeFileSync(messageFile, 'subject\x1fwith-separator\n\nbody line\n');
     git(repo, ['commit', '-F', messageFile], dateEnv(BASE_DATE));
 

@@ -235,9 +235,9 @@ onBeforeUnmount(() => {
 
 function lineClass(row: RenderRow): Record<string, boolean> {
   return {
-    'dsh-git-graph-diff-line-add': row.kind === 'add',
-    'dsh-git-graph-diff-line-del': row.kind === 'del',
-    'dsh-git-graph-diff-line-meta': row.kind === 'meta',
+    'visible-git-graph-diff-line-add': row.kind === 'add',
+    'visible-git-graph-diff-line-del': row.kind === 'del',
+    'visible-git-graph-diff-line-meta': row.kind === 'meta',
   };
 }
 
@@ -261,31 +261,31 @@ function textPrefix(row: RenderRow): string {
 <template>
   <div
     v-if="open"
-    class="dsh-git-graph-diff-drawer"
+    class="visible-git-graph-diff-drawer"
     :class="{
-      'dsh-git-graph-diff-resizing': dragging,
-      'dsh-git-graph-diff-tab': !isDrawer,
+      'visible-git-graph-diff-resizing': dragging,
+      'visible-git-graph-diff-tab': !isDrawer,
     }"
     :style="isDrawer ? drawerStyle : undefined"
   >
-    <div v-if="isDrawer" class="dsh-git-graph-diff-resize" @pointerdown="onResizeStart"></div>
+    <div v-if="isDrawer" class="visible-git-graph-diff-resize" @pointerdown="onResizeStart"></div>
 
     <div
-      class="dsh-git-graph-diff-head"
-      :class="{ 'dsh-git-graph-diff-head-tab': !isDrawer }"
+      class="visible-git-graph-diff-head"
+      :class="{ 'visible-git-graph-diff-head-tab': !isDrawer }"
       @pointerdown="isDrawer ? onResizeStart($event) : undefined"
     >
-      <span class="dsh-git-graph-diff-title" :title="file?.path ?? ''">
+      <span class="visible-git-graph-diff-title" :title="file?.path ?? ''">
         {{ file?.path ?? '' }}
       </span>
-      <span v-if="file" class="dsh-git-graph-diff-stats">
-        <span class="dsh-git-graph-add">+{{ file.additions }}</span>
-        <span class="dsh-git-graph-del">-{{ file.deletions }}</span>
+      <span v-if="file" class="visible-git-graph-diff-stats">
+        <span class="visible-git-graph-add">+{{ file.additions }}</span>
+        <span class="visible-git-graph-del">-{{ file.deletions }}</span>
       </span>
       <button
         v-if="isDrawer"
         type="button"
-        class="dsh-git-graph-diff-close"
+        class="visible-git-graph-diff-close"
         aria-label="关闭差异"
         title="关闭差异"
         @click="emit('close')"
@@ -294,32 +294,32 @@ function textPrefix(row: RenderRow): string {
       </button>
     </div>
 
-    <div ref="bodyEl" class="dsh-git-graph-diff-body" @scroll="onScroll">
-      <div v-if="loading" class="dsh-git-graph-diff-state" role="status" aria-live="polite">
+    <div ref="bodyEl" class="visible-git-graph-diff-body" @scroll="onScroll">
+      <div v-if="loading" class="visible-git-graph-diff-state" role="status" aria-live="polite">
         正在读取差异…
       </div>
-      <div v-else-if="error" class="dsh-git-graph-diff-state is-error" role="alert">
+      <div v-else-if="error" class="visible-git-graph-diff-state is-error" role="alert">
         {{ error }}
       </div>
-      <div v-else-if="diff?.binary" class="dsh-git-graph-diff-state">
+      <div v-else-if="diff?.binary" class="visible-git-graph-diff-state">
         二进制文件，暂不支持预览
       </div>
-      <div v-else-if="noTextDiff" class="dsh-git-graph-diff-state">
+      <div v-else-if="noTextDiff" class="visible-git-graph-diff-state">
         无文本差异（可能是纯重命名、模式或权限变更）
       </div>
       <div
         v-else-if="diff"
-        class="dsh-git-graph-diff-viewport"
+        class="visible-git-graph-diff-viewport"
         :style="{ height: `${totalHeight}px` }"
       >
         <div :style="{ height: `${topSpacer}px` }"></div>
 
         <template v-for="row in visibleRows" :key="row.key">
-          <div v-if="row.kind === 'hunk'" class="dsh-git-graph-diff-hunk">{{ row.text }}</div>
-          <div v-else class="dsh-git-graph-diff-line" :class="lineClass(row)">
-            <span class="dsh-git-graph-diff-gutter">{{ oldLine(row) }}</span>
-            <span class="dsh-git-graph-diff-gutter">{{ newLine(row) }}</span>
-            <span class="dsh-git-graph-diff-text">{{ textPrefix(row) }}{{ row.text }}</span>
+          <div v-if="row.kind === 'hunk'" class="visible-git-graph-diff-hunk">{{ row.text }}</div>
+          <div v-else class="visible-git-graph-diff-line" :class="lineClass(row)">
+            <span class="visible-git-graph-diff-gutter">{{ oldLine(row) }}</span>
+            <span class="visible-git-graph-diff-gutter">{{ newLine(row) }}</span>
+            <span class="visible-git-graph-diff-text">{{ textPrefix(row) }}{{ row.text }}</span>
           </div>
         </template>
 

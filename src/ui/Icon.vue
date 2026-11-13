@@ -44,7 +44,7 @@ const shapes = computed<Shape[]>(() => GLYPHS[props.name] ?? []);
 </script>
 
 <template>
-  <span class="dsh-gg-icon" :data-icon="name" aria-hidden="true">
+  <span class="vgg-icon" :data-icon="name" aria-hidden="true">
     <svg
       viewBox="0 0 24 24"
       fill="none"

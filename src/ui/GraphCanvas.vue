@@ -70,8 +70,8 @@ function selectPoint(row: number): void {
 
 <template>
   <svg
-    class="dsh-git-graph-svg"
-    :class="{ 'dsh-git-graph-svg-masked': constrained }"
+    class="visible-git-graph-svg"
+    :class="{ 'visible-git-graph-svg-masked': constrained }"
     xmlns="http://www.w3.org/2000/svg"
     :width="width"
     :height="height"
@@ -83,7 +83,7 @@ function selectPoint(row: number): void {
       v-for="primitive in pathPrimitives"
       :key="primitive.key"
       :class="
-        primitive.kind === 'shadow' ? 'dsh-git-graph-shadow' : 'dsh-git-graph-line'
+        primitive.kind === 'shadow' ? 'visible-git-graph-shadow' : 'visible-git-graph-line'
       "
       :d="primitive.d"
       :stroke="primitive.stroke"
@@ -98,7 +98,7 @@ function selectPoint(row: number): void {
     <g v-for="(point, index) in layout.points" :key="`point-${index}`">
       <circle
         :key="`dot-${index}`"
-        class="dsh-graph-point"
+        class="vgg-graph-point"
         :cx="point.x"
         :cy="point.y"
         :r="point.stash ? 4.5 : 4"
@@ -110,7 +110,7 @@ function selectPoint(row: number): void {
       <circle
         v-if="point.stash"
         :key="`inner-${index}`"
-        class="dsh-git-graph-point-inner"
+        class="visible-git-graph-point-inner"
         :cx="point.x"
         :cy="point.y"
         r="2"
@@ -120,7 +120,7 @@ function selectPoint(row: number): void {
       <circle
         v-if="point.stashInternal"
         :key="`ring-${index}`"
-        class="dsh-git-graph-point-ring"
+        class="visible-git-graph-point-ring"
         :cx="point.x"
         :cy="point.y"
         r="5.5"

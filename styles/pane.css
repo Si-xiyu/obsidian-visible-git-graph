@@ -7,11 +7,11 @@
  * so themes can retune the columns without editing selectors.
  */
 
-.dsh-gg-view {
-  --dsh-gg-row-height: 24px;
-  --dsh-gg-gutter: 8px;
-  --dsh-gg-date-column: 130px;
-  --dsh-gg-author-column: 110px;
+.vgg-view {
+  --vgg-row-height: 24px;
+  --vgg-gutter: 8px;
+  --vgg-date-column: 130px;
+  --vgg-author-column: 110px;
   display: flex;
   flex: 1 1 auto;
   flex-direction: column;
@@ -22,15 +22,15 @@
 
 /* ── header ─────────────────────────────────────────────────────── */
 
-.dsh-gg-head {
+.vgg-head {
   display: flex;
   flex-direction: column;
   gap: var(--size-4-1, 4px);
-  padding: 6px var(--dsh-gg-gutter);
+  padding: 6px var(--vgg-gutter);
   border-bottom: 1px solid var(--background-modifier-border);
 }
 
-.dsh-gg-head-identity {
+.vgg-head-identity {
   display: flex;
   align-items: center;
   gap: 4px;
@@ -39,46 +39,46 @@
   font-weight: var(--font-semibold, 600);
 }
 
-.dsh-gg-repo {
+.vgg-repo {
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
 }
 
-.dsh-gg-branch {
+.vgg-branch {
   color: var(--text-muted);
   font-weight: var(--font-normal, 400);
 }
 
-.dsh-gg-branch::before {
+.vgg-branch::before {
   content: '·';
   margin-inline-end: 4px;
 }
 
-.dsh-gg-head-tools {
+.vgg-head-tools {
   display: flex;
   align-items: center;
   gap: 4px;
 }
 
-.dsh-gg-ref-select {
+.vgg-ref-select {
   flex: 0 0 auto;
   font-size: var(--font-ui-smaller, 12px);
 }
 
-.dsh-gg-search {
+.vgg-search {
   flex: 1 1 auto;
   min-width: 0;
   font-size: var(--font-ui-smaller, 12px);
 }
 
-.dsh-gg-icon-btn {
+.vgg-icon-btn {
   flex: 0 0 auto;
 }
 
 /* ── list and rows ──────────────────────────────────────────────── */
 
-.dsh-gg-list {
+.vgg-list {
   position: relative;
   flex: 1 1 auto;
   min-height: 0;
@@ -88,57 +88,57 @@
   scrollbar-gutter: stable;
 }
 
-.dsh-gg-list-spacer {
+.vgg-list-spacer {
   position: relative;
   width: 100%;
 }
 
-.dsh-gg-item {
+.vgg-item {
   position: absolute;
   inset-inline: 0;
   top: 0;
 }
 
-.dsh-gg-row {
+.vgg-row {
   display: flex;
   align-items: center;
   gap: 6px;
-  height: var(--dsh-gg-row-height);
-  padding: 0 var(--dsh-gg-gutter);
-  line-height: var(--dsh-gg-row-height);
+  height: var(--vgg-row-height);
+  padding: 0 var(--vgg-gutter);
+  line-height: var(--vgg-row-height);
   white-space: nowrap;
   cursor: pointer;
   user-select: none;
 }
 
-.dsh-gg-row:hover,
-.dsh-gg-row:focus-visible {
+.vgg-row:hover,
+.vgg-row:focus-visible {
   background: var(--background-modifier-hover);
   outline: none;
 }
 
-.dsh-gg-row-expanded {
+.vgg-row-expanded {
   background: var(--background-secondary);
 }
 
-.dsh-gg-row-expanded .dsh-gg-subject,
-.dsh-gg-row-head .dsh-gg-subject {
+.vgg-row-expanded .vgg-subject,
+.vgg-row-head .vgg-subject {
   font-weight: var(--font-semibold, 600);
 }
 
-.dsh-gg-lane-space {
+.vgg-lane-space {
   flex: 0 0 auto;
-  height: var(--dsh-gg-row-height);
+  height: var(--vgg-row-height);
 }
 
-.dsh-gg-subject {
+.vgg-subject {
   flex: 1 1 auto;
   min-width: 2em;
   overflow: hidden;
   text-overflow: ellipsis;
 }
 
-.dsh-gg-refs {
+.vgg-refs {
   display: flex;
   flex: 0 0 auto;
   gap: 2px;
@@ -147,15 +147,15 @@
   overflow: hidden;
 }
 
-.dsh-gg-date {
-  flex: 0 0 var(--dsh-gg-date-column);
+.vgg-date {
+  flex: 0 0 var(--vgg-date-column);
   overflow: hidden;
   text-overflow: ellipsis;
   color: var(--text-faint);
 }
 
-.dsh-gg-author {
-  flex: 0 0 var(--dsh-gg-author-column);
+.vgg-author {
+  flex: 0 0 var(--vgg-author-column);
   overflow: hidden;
   text-overflow: ellipsis;
   color: var(--text-muted);
@@ -163,7 +163,7 @@
 
 /* ── ref capsules ───────────────────────────────────────────────── */
 
-.dsh-gg-ref {
+.vgg-ref {
   display: inline-flex;
   align-items: center;
   gap: 2px;
@@ -178,36 +178,36 @@
   overflow: hidden;
 }
 
-.dsh-gg-ref[data-kind='tag'] {
+.vgg-ref[data-kind='tag'] {
   color: var(--color-yellow);
 }
 
-.dsh-gg-ref-head {
+.vgg-ref-head {
   background: var(--interactive-accent);
   border-color: var(--interactive-accent);
   color: var(--text-on-accent);
 }
 
-.dsh-gg-ref-name {
+.vgg-ref-name {
   overflow: hidden;
   text-overflow: ellipsis;
 }
 
 /* ── glyphs ─────────────────────────────────────────────────────── */
 
-.dsh-gg-icon {
+.vgg-icon {
   display: inline-flex;
   align-items: center;
 }
 
-.dsh-gg-icon svg {
+.vgg-icon svg {
   width: 12px;
   height: 12px;
 }
 
 /* ── inline details ─────────────────────────────────────────────── */
 
-.dsh-gg-details-host {
+.vgg-details-host {
   position: absolute;
   inset-inline: 0;
   z-index: 2;

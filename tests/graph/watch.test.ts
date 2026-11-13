@@ -22,7 +22,7 @@ describe('watchRepo', () => {
   });
 
   it('reports a write inside .git and stops after close', async () => {
-    root = await mkdtemp(join(tmpdir(), 'dsh-git-watch-'));
+    root = await mkdtemp(join(tmpdir(), 'visible-git-watch-'));
     await mkdir(join(root, '.git'));
 
     let calls = 0;
@@ -44,7 +44,7 @@ describe('watchRepo', () => {
   });
 
   it('coalesces a burst of writes into one callback', async () => {
-    root = await mkdtemp(join(tmpdir(), 'dsh-git-watch-'));
+    root = await mkdtemp(join(tmpdir(), 'visible-git-watch-'));
     await mkdir(join(root, '.git'));
 
     let calls = 0;
@@ -61,7 +61,7 @@ describe('watchRepo', () => {
   });
 
   it('does not fire a pending callback after close', async () => {
-    root = await mkdtemp(join(tmpdir(), 'dsh-git-watch-'));
+    root = await mkdtemp(join(tmpdir(), 'visible-git-watch-'));
     await mkdir(join(root, '.git'));
 
     let calls = 0;
@@ -78,7 +78,7 @@ describe('watchRepo', () => {
   });
 
   it('follows a worktree .git pointer and its shared commondir', async () => {
-    root = await mkdtemp(join(tmpdir(), 'dsh-git-watch-'));
+    root = await mkdtemp(join(tmpdir(), 'visible-git-watch-'));
     const worktreeGit = join(root, 'worktree-git');
     const commonGit = join(root, 'common-git');
     await mkdir(worktreeGit);
@@ -97,7 +97,7 @@ describe('watchRepo', () => {
   });
 
   it('returns a no-op watcher when the path cannot be watched', async () => {
-    root = await mkdtemp(join(tmpdir(), 'dsh-git-watch-'));
+    root = await mkdtemp(join(tmpdir(), 'visible-git-watch-'));
     let calls = 0;
     // No `.git` and no permission problems: the root fallback is watchable, so
     // this only proves the watcher is created and can be closed safely twice.

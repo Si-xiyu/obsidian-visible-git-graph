@@ -247,7 +247,7 @@ function openFile(file: CommitFile): void {
 </script>
 
 <template>
-  <div class="dsh-gg-view">
+  <div class="vgg-view">
     <GraphHeader
       :repo-name="repoName"
       :branch="model.headBranch"
@@ -259,19 +259,19 @@ function openFile(file: CommitFile): void {
       @update:filter-text="emit('update:filterText', $event)"
     />
 
-    <div ref="scrollEl" class="dsh-gg-list" @scroll="onScroll">
-      <div class="dsh-gg-list-spacer" :style="{ height: `${totalHeight}px` }">
+    <div ref="scrollEl" class="vgg-list" @scroll="onScroll">
+      <div class="vgg-list-spacer" :style="{ height: `${totalHeight}px` }">
         <div
           v-for="entry in viewportRows"
           :key="entry.row.hash"
-          class="dsh-gg-item"
+          class="vgg-item"
           :style="{ top: `${virtualRowTop(entry.index, ROW_HEIGHT, expandedIndex, detailsHeight)}px` }"
         >
           <div
-            class="dsh-gg-row"
+            class="vgg-row"
             :class="{
-              'dsh-gg-row-expanded': entry.row.hash === selectedHash,
-              'dsh-gg-row-head': entry.row.hash === model.head,
+              'vgg-row-expanded': entry.row.hash === selectedHash,
+              'vgg-row-head': entry.row.hash === model.head,
             }"
             role="button"
             tabindex="0"
@@ -282,24 +282,24 @@ function openFile(file: CommitFile): void {
             @keydown.space.prevent="select(entry.row)"
           >
             <div
-              class="dsh-gg-lane-space"
+              class="vgg-lane-space"
               :style="{ width: `${filtered ? 0 : model.graphWidth}px` }"
             ></div>
-            <span v-if="entry.row.refs.length > 0" class="dsh-gg-refs">
+            <span v-if="entry.row.refs.length > 0" class="vgg-refs">
               <RefBadge v-for="badge in entry.row.refs" :key="badge.key" :badge="badge" />
             </span>
-            <span class="dsh-gg-subject" :title="entry.row.description">{{ entry.row.description }}</span>
-            <span class="dsh-gg-date" :title="formatDate(entry.row.date, dateFormat)">
+            <span class="vgg-subject" :title="entry.row.description">{{ entry.row.description }}</span>
+            <span class="vgg-date" :title="formatDate(entry.row.date, dateFormat)">
               {{ formatRelative(entry.row.date) }}
             </span>
-            <span class="dsh-gg-author" :title="entry.row.commit.email">{{ entry.row.author }}</span>
+            <span class="vgg-author" :title="entry.row.commit.email">{{ entry.row.author }}</span>
           </div>
         </div>
 
         <div
           v-if="expandedIndex >= 0"
           ref="detailsEl"
-          class="dsh-gg-details-host"
+          class="vgg-details-host"
           :style="{ top: `${(expandedIndex + 1) * ROW_HEIGHT}px` }"
         >
           <CommitDetails

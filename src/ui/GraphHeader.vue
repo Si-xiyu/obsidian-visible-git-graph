@@ -34,16 +34,16 @@ function updateSearch(event: Event): void {
 </script>
 
 <template>
-  <div class="dsh-gg-head">
-    <div class="dsh-gg-head-identity">
+  <div class="vgg-head">
+    <div class="vgg-head-identity">
       <Icon name="git-graph" />
-      <span class="dsh-gg-repo" :title="repoName">{{ repoName }}</span>
-      <span class="dsh-gg-branch">{{ branchLabel }}</span>
+      <span class="vgg-repo" :title="repoName">{{ repoName }}</span>
+      <span class="vgg-branch">{{ branchLabel }}</span>
     </div>
 
-    <div class="dsh-gg-head-tools">
+    <div class="vgg-head-tools">
       <select
-        class="dsh-gg-ref-select dropdown"
+        class="vgg-ref-select dropdown"
         :value="refFilter"
         aria-label="引用过滤"
         title="Local：本地分支和标签；All：还包含远端跟踪引用"
@@ -54,7 +54,7 @@ function updateSearch(event: Event): void {
       </select>
 
       <input
-        class="dsh-gg-search"
+        class="vgg-search"
         type="search"
         placeholder="Filter commits"
         :value="filterText"
@@ -63,7 +63,7 @@ function updateSearch(event: Event): void {
 
       <button
         type="button"
-        class="dsh-gg-icon-btn clickable-icon"
+        class="vgg-icon-btn clickable-icon"
         :aria-label="refreshLabel"
         :title="refreshLabel"
         :disabled="loading"

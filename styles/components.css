@@ -10,7 +10,7 @@
  * Root mounts this wrapper inside the pane's flex column; without an explicit
  * flex child the table would size to its content and never scroll internally.
  */
-.dsh-git-graph-root-inner {
+.visible-git-graph-root-inner {
   display: flex;
   flex: 1 1 auto;
   flex-direction: column;
@@ -18,7 +18,7 @@
   min-height: 0;
 }
 
-.dsh-git-graph-table {
+.visible-git-graph-table {
   display: flex;
   flex: 1 1 auto;
   flex-direction: column;
@@ -29,12 +29,12 @@
   color: var(--text-normal);
 }
 
-.dsh-git-graph-table,
-.dsh-git-graph-table * {
+.visible-git-graph-table,
+.visible-git-graph-table * {
   box-sizing: border-box;
 }
 
-.dsh-git-graph-table-scroll {
+.visible-git-graph-table-scroll {
   position: relative;
   flex: 1 1 auto;
   min-width: 0;
@@ -44,7 +44,7 @@
 
 /* ── Header ─────────────────────────────────────────────────────── */
 
-.dsh-git-graph-table-head {
+.visible-git-graph-table-head {
   position: sticky;
   top: 0;
   z-index: 3;
@@ -55,7 +55,7 @@
   font-weight: 600;
 }
 
-.dsh-git-graph-th {
+.visible-git-graph-th {
   min-width: 0;
   padding: 6px 12px;
   line-height: 18px;
@@ -64,13 +64,13 @@
   text-overflow: ellipsis;
 }
 
-.dsh-git-graph-th-right {
+.visible-git-graph-th-right {
   text-align: right;
 }
 
 /* ── Rows ───────────────────────────────────────────────────────── */
 
-.dsh-git-graph-table-wrap {
+.visible-git-graph-table-wrap {
   position: relative;
   min-width: 100%;
 }
@@ -78,7 +78,7 @@
 /* ── Pagination ─────────────────────────────────────────────────── */
 
 /* Sits after the virtual spacer (never over the SVG), at the bottom of the list. */
-.dsh-git-graph-load-more {
+.visible-git-graph-load-more {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -87,7 +87,7 @@
   background: var(--background-primary);
 }
 
-.dsh-git-graph-load-more-button {
+.visible-git-graph-load-more-button {
   height: auto;
   min-height: 0;
   padding: 3px 12px;
@@ -102,16 +102,16 @@
   cursor: pointer;
 }
 
-.dsh-git-graph-load-more-button:hover:not(:disabled) {
+.visible-git-graph-load-more-button:hover:not(:disabled) {
   background: rgba(128, 128, 128, 0.2);
 }
 
-.dsh-git-graph-load-more-button:disabled {
+.visible-git-graph-load-more-button:disabled {
   opacity: 0.6;
   cursor: default;
 }
 
-.dsh-git-graph-row {
+.visible-git-graph-row {
   display: grid;
   align-items: center;
   height: 24px;
@@ -121,15 +121,15 @@
   cursor: pointer;
 }
 
-.dsh-git-graph-row:hover {
+.visible-git-graph-row:hover {
   background: rgba(128, 128, 128, 0.15);
 }
 
-.dsh-git-graph-row.commitDetailsOpen {
+.visible-git-graph-row.commitDetailsOpen {
   background: rgba(128, 128, 128, 0.25);
 }
 
-.dsh-git-graph-cell {
+.visible-git-graph-cell {
   min-width: 0;
   height: 24px;
   padding: 0 6px;
@@ -139,44 +139,44 @@
   white-space: nowrap;
 }
 
-.dsh-git-graph-graph {
+.visible-git-graph-graph {
   padding: 0;
 }
 
-.dsh-git-graph-author,
-.dsh-git-graph-date,
-.dsh-git-graph-commit {
+.visible-git-graph-author,
+.visible-git-graph-date,
+.visible-git-graph-commit {
   text-align: right;
 }
 
-.dsh-git-graph-date {
+.visible-git-graph-date {
   font-variant-numeric: tabular-nums;
 }
 
-.dsh-git-graph-commit {
+.visible-git-graph-commit {
   font-family: var(--font-monospace, monospace);
   color: var(--text-faint);
 }
 
 /* Muted rows fade the text only: the graph line and ref pills stay legible. */
-.dsh-git-graph-row.muted .dsh-git-graph-title,
-.dsh-git-graph-row.muted .dsh-git-graph-author,
-.dsh-git-graph-row.muted .dsh-git-graph-date,
-.dsh-git-graph-row.muted .dsh-git-graph-commit {
+.visible-git-graph-row.muted .visible-git-graph-title,
+.visible-git-graph-row.muted .visible-git-graph-author,
+.visible-git-graph-row.muted .visible-git-graph-date,
+.visible-git-graph-row.muted .visible-git-graph-commit {
   opacity: 0.5;
 }
 
-.dsh-git-graph-row.current .dsh-git-graph-title {
+.visible-git-graph-row.current .visible-git-graph-title {
   font-weight: 700;
 }
 
 /* ── Description + refs ─────────────────────────────────────────── */
 
-.dsh-git-graph-description {
+.visible-git-graph-description {
   padding: 0 6px;
 }
 
-.dsh-git-graph-description-inner {
+.visible-git-graph-description-inner {
   display: flex;
   align-items: center;
   gap: 5px;
@@ -186,7 +186,7 @@
   white-space: nowrap;
 }
 
-.dsh-git-graph-title {
+.visible-git-graph-title {
   flex: 0 1 auto;
   min-width: 0;
   overflow: hidden;
@@ -194,7 +194,7 @@
   white-space: nowrap;
 }
 
-.dsh-git-graph-ref {
+.visible-git-graph-ref {
   display: inline-flex;
   flex: 0 0 auto;
   align-items: center;
@@ -211,11 +211,11 @@
   cursor: pointer;
 }
 
-.dsh-git-graph-ref-head {
+.visible-git-graph-ref-head {
   font-weight: 600;
 }
 
-.dsh-git-graph-ref-icon {
+.visible-git-graph-ref-icon {
   flex: 0 0 14px;
   width: 14px;
   height: 14px;
@@ -223,7 +223,7 @@
   border-radius: 2px;
 }
 
-.dsh-git-graph-ref-name {
+.visible-git-graph-ref-name {
   min-width: 0;
   max-width: 170px;
   overflow: hidden;
@@ -233,7 +233,7 @@
 
 /* ── SVG canvas ─────────────────────────────────────────────────── */
 
-.dsh-git-graph-svg {
+.visible-git-graph-svg {
   position: absolute;
   top: 0;
   left: 0;
@@ -242,32 +242,32 @@
   overflow: hidden;
 }
 
-.dsh-git-graph-svg-masked {
+.visible-git-graph-svg-masked {
   -webkit-mask-image: linear-gradient(to right, black calc(100% - 24px), transparent);
   mask-image: linear-gradient(to right, black calc(100% - 24px), transparent);
 }
 
-.dsh-git-graph-shadow {
+.visible-git-graph-shadow {
   fill: none;
 }
 
-.dsh-git-graph-line {
+.visible-git-graph-line {
   fill: none;
 }
 
-.dsh-git-graph-svg .dsh-graph-point {
+.visible-git-graph-svg .vgg-graph-point {
   pointer-events: all;
   cursor: pointer;
 }
 
-.dsh-git-graph-svg .dsh-git-graph-point-inner,
-.dsh-git-graph-svg .dsh-git-graph-point-ring {
+.visible-git-graph-svg .visible-git-graph-point-inner,
+.visible-git-graph-svg .visible-git-graph-point-ring {
   pointer-events: none;
 }
 
 /* ── Ready layout: table + details, drawer anchored to this box ─── */
 
-.dsh-git-graph-ready {
+.visible-git-graph-ready {
   position: relative;
   display: flex;
   flex: 1 1 auto;
@@ -279,7 +279,7 @@
 
 /* ── Commit details panel ───────────────────────────────────────── */
 
-.dsh-git-graph-details {
+.visible-git-graph-details {
   flex: 0 1 auto;
   min-height: 0;
   max-height: 50%;
@@ -292,16 +292,16 @@
   color: var(--text-normal);
 }
 
-.dsh-git-graph-details,
-.dsh-git-graph-details * {
+.visible-git-graph-details,
+.visible-git-graph-details * {
   box-sizing: border-box;
 }
 
-.dsh-git-graph-details-summary {
+.visible-git-graph-details-summary {
   padding: 8px 12px 6px;
 }
 
-.dsh-git-graph-detail-message {
+.visible-git-graph-detail-message {
   margin: 0 0 6px;
   font-size: 13px;
   font-weight: 600;
@@ -310,49 +310,49 @@
   overflow-wrap: anywhere;
 }
 
-.dsh-git-graph-detail-meta {
+.visible-git-graph-detail-meta {
   display: grid;
   grid-template-columns: max-content minmax(0, 1fr);
   gap: 1px 10px;
   margin: 0;
 }
 
-.dsh-git-graph-detail-meta dt {
+.visible-git-graph-detail-meta dt {
   color: var(--text-muted);
   white-space: nowrap;
 }
 
-.dsh-git-graph-detail-meta dd {
+.visible-git-graph-detail-meta dd {
   min-width: 0;
   margin: 0;
   overflow-wrap: anywhere;
 }
 
-.dsh-git-graph-detail-email {
+.visible-git-graph-detail-email {
   color: var(--text-muted);
 }
 
-.dsh-git-graph-detail-date {
+.visible-git-graph-detail-date {
   font-variant-numeric: tabular-nums;
 }
 
-.dsh-git-graph-detail-parents span {
+.visible-git-graph-detail-parents span {
   font-family: var(--font-monospace, monospace);
 }
 
-.dsh-git-graph-detail-hash {
+.visible-git-graph-detail-hash {
   font-family: var(--font-monospace, monospace);
   color: var(--text-faint);
   overflow-wrap: anywhere;
 }
 
-.dsh-git-graph-detail-empty {
+.visible-git-graph-detail-empty {
   color: var(--text-faint);
 }
 
 /* ── Changed files ──────────────────────────────────────────────── */
 
-.dsh-git-graph-files-head {
+.visible-git-graph-files-head {
   position: sticky;
   top: 0;
   z-index: 1;
@@ -367,38 +367,38 @@
   line-height: 18px;
 }
 
-.dsh-git-graph-files-title {
+.visible-git-graph-files-title {
   font-weight: 600;
   white-space: nowrap;
 }
 
-.dsh-git-graph-files-count {
+.visible-git-graph-files-count {
   color: var(--text-muted);
   white-space: nowrap;
 }
 
-.dsh-git-graph-files-totals {
+.visible-git-graph-files-totals {
   display: inline-flex;
   gap: 6px;
   font-variant-numeric: tabular-nums;
   white-space: nowrap;
 }
 
-.dsh-git-graph-add {
+.visible-git-graph-add {
   color: var(--color-green, #2ea043);
 }
 
-.dsh-git-graph-del {
+.visible-git-graph-del {
   color: var(--color-red, #f85149);
 }
 
-.dsh-git-graph-files-toggles {
+.visible-git-graph-files-toggles {
   display: inline-flex;
   gap: 2px;
   margin-left: auto;
 }
 
-.dsh-git-graph-files-toggle {
+.visible-git-graph-files-toggle {
   height: auto;
   min-height: 0;
   padding: 1px 6px;
@@ -414,33 +414,33 @@
   cursor: pointer;
 }
 
-.dsh-git-graph-files-toggle:hover {
+.visible-git-graph-files-toggle:hover {
   background: rgba(128, 128, 128, 0.15);
   color: var(--text-normal);
 }
 
-.dsh-git-graph-files-toggle.active {
+.visible-git-graph-files-toggle.active {
   border-color: rgba(128, 128, 128, 0.45);
   background: rgba(128, 128, 128, 0.2);
   color: var(--text-normal);
 }
 
-.dsh-git-graph-files-state {
+.visible-git-graph-files-state {
   padding: 8px 12px 10px;
   color: var(--text-muted);
   overflow-wrap: anywhere;
 }
 
-.dsh-git-graph-files-state.is-error {
+.visible-git-graph-files-state.is-error {
   color: var(--color-red, #f85149);
   white-space: pre-wrap;
 }
 
-.dsh-git-graph-files {
+.visible-git-graph-files {
   padding: 2px 0 6px;
 }
 
-.dsh-git-graph-file {
+.visible-git-graph-file {
   display: flex;
   align-items: center;
   gap: 6px;
@@ -459,17 +459,17 @@
   cursor: pointer;
 }
 
-.dsh-git-graph-file:hover {
+.visible-git-graph-file:hover {
   background: rgba(128, 128, 128, 0.15);
 }
 
-.dsh-git-graph-file:focus-visible,
-.dsh-git-graph-files-toggle:focus-visible {
+.visible-git-graph-file:focus-visible,
+.visible-git-graph-files-toggle:focus-visible {
   outline: 2px solid var(--interactive-accent, #7c8cff);
   outline-offset: -2px;
 }
 
-.dsh-git-graph-dir {
+.visible-git-graph-dir {
   height: 20px;
   padding-right: 12px;
   color: var(--text-muted);
@@ -480,7 +480,7 @@
   text-overflow: ellipsis;
 }
 
-.dsh-git-graph-file-status {
+.visible-git-graph-file-status {
   flex: 0 0 14px;
   width: 14px;
   font-family: var(--font-monospace, monospace);
@@ -490,32 +490,32 @@
   color: var(--text-faint);
 }
 
-.dsh-git-graph-status-a {
+.visible-git-graph-status-a {
   color: var(--color-green, #2ea043);
 }
 
-.dsh-git-graph-status-m {
+.visible-git-graph-status-m {
   color: var(--color-yellow, #d29922);
 }
 
-.dsh-git-graph-status-d {
+.visible-git-graph-status-d {
   color: var(--color-red, #f85149);
 }
 
-.dsh-git-graph-status-r,
-.dsh-git-graph-status-c {
+.visible-git-graph-status-r,
+.visible-git-graph-status-c {
   color: var(--color-blue, #58a6ff);
 }
 
-.dsh-git-graph-status-t,
-.dsh-git-graph-status-u,
-.dsh-git-graph-status-x,
-.dsh-git-graph-status-b,
-.dsh-git-graph-status-other {
+.visible-git-graph-status-t,
+.visible-git-graph-status-u,
+.visible-git-graph-status-x,
+.visible-git-graph-status-b,
+.visible-git-graph-status-other {
   color: var(--text-faint, #8b949e);
 }
 
-.dsh-git-graph-file-path {
+.visible-git-graph-file-path {
   flex: 1 1 auto;
   min-width: 0;
   overflow: hidden;
@@ -523,7 +523,7 @@
   white-space: nowrap;
 }
 
-.dsh-git-graph-file-stat {
+.visible-git-graph-file-stat {
   flex: 0 0 auto;
   font-family: var(--font-monospace, monospace);
   font-size: 11px;
@@ -531,13 +531,13 @@
   white-space: nowrap;
 }
 
-.dsh-git-graph-file-binary {
+.visible-git-graph-file-binary {
   color: var(--text-faint);
 }
 
 /* ── Diff drawer ────────────────────────────────────────────────── */
 
-.dsh-git-graph-diff-drawer {
+.visible-git-graph-diff-drawer {
   position: absolute;
   right: 0;
   bottom: 0;
@@ -552,26 +552,26 @@
   box-shadow: 0 -6px 16px rgba(0, 0, 0, 0.25);
 }
 
-.dsh-git-graph-diff-drawer,
-.dsh-git-graph-diff-drawer * {
+.visible-git-graph-diff-drawer,
+.visible-git-graph-diff-drawer * {
   box-sizing: border-box;
 }
 
-.dsh-git-graph-diff-resizing {
+.visible-git-graph-diff-resizing {
   user-select: none;
 }
 
-.dsh-git-graph-diff-resize {
+.visible-git-graph-diff-resize {
   flex: 0 0 6px;
   height: 6px;
   cursor: ns-resize;
 }
 
-.dsh-git-graph-diff-resize:hover {
+.visible-git-graph-diff-resize:hover {
   background: rgba(128, 128, 128, 0.35);
 }
 
-.dsh-git-graph-diff-head {
+.visible-git-graph-diff-head {
   display: flex;
   flex: 0 0 auto;
   align-items: center;
@@ -583,7 +583,7 @@
   cursor: ns-resize;
 }
 
-.dsh-git-graph-diff-title {
+.visible-git-graph-diff-title {
   flex: 1 1 auto;
   min-width: 0;
   overflow: hidden;
@@ -592,7 +592,7 @@
   font-family: var(--font-monospace, monospace);
 }
 
-.dsh-git-graph-diff-stats {
+.visible-git-graph-diff-stats {
   display: inline-flex;
   flex: 0 0 auto;
   gap: 6px;
@@ -601,7 +601,7 @@
   font-variant-numeric: tabular-nums;
 }
 
-.dsh-git-graph-diff-close {
+.visible-git-graph-diff-close {
   flex: 0 0 auto;
   height: auto;
   min-height: 0;
@@ -618,12 +618,12 @@
   cursor: pointer;
 }
 
-.dsh-git-graph-diff-close:hover {
+.visible-git-graph-diff-close:hover {
   background: rgba(128, 128, 128, 0.15);
   color: var(--text-normal);
 }
 
-.dsh-git-graph-diff-body {
+.visible-git-graph-diff-body {
   flex: 1 1 auto;
   min-height: 0;
   overflow: auto;
@@ -632,7 +632,7 @@
   line-height: 20px;
 }
 
-.dsh-git-graph-diff-state {
+.visible-git-graph-diff-state {
   padding: 10px 12px;
   color: var(--text-muted);
   font-family: var(--font-interface, sans-serif);
@@ -641,17 +641,17 @@
   overflow-wrap: anywhere;
 }
 
-.dsh-git-graph-diff-state.is-error {
+.visible-git-graph-diff-state.is-error {
   color: var(--color-red, #f85149);
   white-space: pre-wrap;
 }
 
-.dsh-git-graph-diff-viewport {
+.visible-git-graph-diff-viewport {
   position: relative;
   min-width: max-content;
 }
 
-.dsh-git-graph-diff-line {
+.visible-git-graph-diff-line {
   display: flex;
   align-items: stretch;
   height: 20px;
@@ -659,7 +659,7 @@
   white-space: pre;
 }
 
-.dsh-git-graph-diff-gutter {
+.visible-git-graph-diff-gutter {
   flex: 0 0 44px;
   width: 44px;
   padding-right: 8px;
@@ -668,26 +668,26 @@
   user-select: none;
 }
 
-.dsh-git-graph-diff-text {
+.visible-git-graph-diff-text {
   flex: 0 0 auto;
   padding: 0 8px;
   white-space: pre;
 }
 
 /* Add/del tints stay readable on both light and dark themes. */
-.dsh-git-graph-diff-line-add {
+.visible-git-graph-diff-line-add {
   background: rgba(46, 160, 67, 0.16);
 }
 
-.dsh-git-graph-diff-line-del {
+.visible-git-graph-diff-line-del {
   background: rgba(248, 81, 73, 0.16);
 }
 
-.dsh-git-graph-diff-line-meta {
+.visible-git-graph-diff-line-meta {
   color: var(--text-faint);
 }
 
-.dsh-git-graph-diff-hunk {
+.visible-git-graph-diff-hunk {
   height: 20px;
   min-height: 20px;
   padding: 0 8px;
@@ -700,12 +700,12 @@
 
 /* ── Diff tab (full Obsidian leaf) ─────────────────────────────── */
 
-.dsh-git-graph-diff-view {
+.visible-git-graph-diff-view {
   height: 100%;
   padding: 0;
 }
 
-.dsh-git-graph-diff-tab {
+.visible-git-graph-diff-tab {
   position: relative;
   height: 100%;
   max-height: none;
@@ -713,34 +713,34 @@
   box-shadow: none;
 }
 
-.dsh-git-graph-diff-head-tab {
+.visible-git-graph-diff-head-tab {
   cursor: default;
 }
 
-.dsh-git-graph-diff-view-inner {
+.visible-git-graph-diff-view-inner {
   height: 100%;
 }
 
 /* Two-column details: summary left, changed files right (like Git Graph). */
-.dsh-git-graph-details {
+.visible-git-graph-details {
   display: flex;
   flex-wrap: wrap;
   align-content: flex-start;
 }
 
-.dsh-git-graph-details-summary {
+.visible-git-graph-details-summary {
   flex: 1 1 260px;
   min-width: 0;
 }
 
-.dsh-git-graph-files-panel {
+.visible-git-graph-files-panel {
   flex: 1 1 220px;
   min-width: 0;
   border-left: 1px solid var(--background-modifier-border);
 }
 
 @media (max-width: 700px) {
-  .dsh-git-graph-files-panel {
+  .visible-git-graph-files-panel {
     border-left: none;
     border-top: 1px solid var(--background-modifier-border);
   }

@@ -6,8 +6,8 @@ import Root from '../src/ui/Root.vue';
 
 describe('scaffold', () => {
   it('manifest declares the expected plugin identity', () => {
-    expect(manifest.id).toBe('dsh-git-graph');
-    expect(manifest.version).toBe('0.1.1');
+    expect(manifest.id).toBe('visible-git-graph');
+    expect(manifest.version).toBe('0.2.0');
     expect(manifest.isDesktopOnly).toBe(true);
   });
 
@@ -19,7 +19,7 @@ describe('scaffold', () => {
     app.mount(host);
     await nextTick();
 
-    const loading = host.querySelector('.dsh-git-graph-loading');
+    const loading = host.querySelector('.visible-git-graph-loading');
     expect(loading).not.toBeNull();
     expect(loading?.textContent).toContain('loading…');
 

@@ -15,7 +15,7 @@ const BASE_DATE = 1_700_000_000;
 const tempDirs: string[] = [];
 
 /** Empty git config files keep the host's global/system configuration out of the tests. */
-const isolatedConfigDir = fs.mkdtempSync(path.join(os.tmpdir(), 'dsh-git-graph-load-config-'));
+const isolatedConfigDir = fs.mkdtempSync(path.join(os.tmpdir(), 'visible-git-graph-load-config-'));
 const emptyGitConfig = path.join(isolatedConfigDir, 'gitconfig');
 fs.writeFileSync(emptyGitConfig, '');
 
@@ -78,7 +78,7 @@ function dateEnv(seconds: number): NodeJS.ProcessEnv {
 }
 
 function initRepo(): string {
-  const dir = mkTempDir('dsh-git-graph-load-repo-');
+  const dir = mkTempDir('visible-git-graph-load-repo-');
   git(dir, ['init', '-b', 'main']);
   git(dir, ['config', 'user.name', 'Test User']);
   git(dir, ['config', 'user.email', 'test@example.com']);
@@ -251,7 +251,7 @@ describe('loadGraph', () => {
   });
 
   it('returns none outside a git repository', async () => {
-    const dir = mkTempDir('dsh-git-graph-load-not-a-repo-');
+    const dir = mkTempDir('visible-git-graph-load-not-a-repo-');
     await expect(loadGraph(dir, DEFAULT_PREFERENCES)).resolves.toEqual({ kind: 'none' });
   });
 

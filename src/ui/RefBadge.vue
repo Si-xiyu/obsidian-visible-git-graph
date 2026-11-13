@@ -27,12 +27,12 @@ const meta = computed<RefMeta>(() => META[props.badge.type]);
 
 <template>
   <span
-    class="dsh-gg-ref"
-    :class="{ 'dsh-gg-ref-head': badge.type === 'head' }"
+    class="vgg-ref"
+    :class="{ 'vgg-ref-head': badge.type === 'head' }"
     :data-kind="meta.kind"
     :title="`${meta.label} ${badge.name}`"
   >
     <Icon :name="meta.icon" />
-    <span class="dsh-gg-ref-name">{{ badge.name }}</span>
+    <span class="vgg-ref-name">{{ badge.name }}</span>
   </span>
 </template>

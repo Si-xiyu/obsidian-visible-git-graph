@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.2.0 — 2026-11-13
+
+### 变更
+
+- 插件更名为 **Visible Git Graph**，插件 id 改为 `visible-git-graph`；安装目录同步改为 `.obsidian/plugins/visible-git-graph`。
+- 视图类型和样式类名改用本项目自己的前缀（`visible-git-graph-*` / `vgg-*`）。
+- 设置页移除多余的顶层标题；插件描述改为动作句。
+
 ## 0.1.1 — 2026-11-13
 
 维护版本：按 Obsidian 社区扫描器的结果修正实现，不改变功能。

@@ -1,4 +1,4 @@
-# DSH Git Graph
+# Visible Git Graph
 
 一个 **桌面端** Obsidian 插件：在右侧面板显示当前 vault 的 Git 提交图，交互参照 VS Code Git Graph。
 
@@ -24,11 +24,11 @@
 2. 在 vault 中创建目录：
 
    ```text
-   <vault>/.obsidian/plugins/dsh-git-graph/
+   <vault>/.obsidian/plugins/visible-git-graph/
    ```
 
 3. 把三个文件放进该目录。
-4. 在 Obsidian「设置 → 第三方插件」中关闭安全模式并启用 **DSH Git Graph**。
+4. 在 Obsidian「设置 → 第三方插件」中关闭安全模式并启用 **Visible Git Graph**。
 5. 点击左侧 ribbon 的 Git 分支图标，或执行命令 **Open Git Graph**。
 
 ### 从源码构建
@@ -49,8 +49,8 @@ npm run build
 2. 创建并推送标签：
 
    ```bash
-   git tag -a 0.1.1 -m "DSH Git Graph 0.1.1"
-   git push origin 0.1.1
+   git tag -a 0.2.0 -m "Visible Git Graph 0.2.0"
+   git push origin 0.2.0
    ```
 
 3. GitHub Actions 会依次执行 `npm ci`、`typecheck`、`test`、`build`，校验 tag 与 manifest 版本一致，
@@ -59,7 +59,7 @@ npm run build
    - `main.js`（来自 `dist/main.js`）
    - `styles.css`（来自 `dist/styles.css`）
    - `versions.json`
-   - `dsh-git-graph-<version>.zip`（前三件套）
+   - `visible-git-graph-<version>.zip`（前三件套）
 
 也可以在 Actions 页面手动触发 `Release` 并填入一个已存在的 tag。
 
@@ -70,7 +70,7 @@ npm run build
 - **引用过滤**：顶部 `Local` 只显示本地分支和标签；`All` 还显示远端跟踪引用（悬停下拉框有说明）。
 - **搜索**：搜索框按描述、作者、hash、ref 过滤（过滤时隐藏图谱）。
 - **加载更多**：滚动到列表底部 25px 内自动加载下一页（没有单独的按钮）。
-- **设置**：Obsidian 设置 → 第三方插件 → DSH Git Graph：
+- **设置**：Obsidian 设置 → 第三方插件 → Visible Git Graph：
   - `Git 可执行文件`：默认 `git`，也可以填绝对路径（例如 Windows 的 `C:\Program Files\Git\cmd\git.exe`）。
   - `每页提交数`：10–5000，默认 200。
   - `引用过滤`：`local` 只显示本地分支与标签，`all` 还包含远端跟踪引用。

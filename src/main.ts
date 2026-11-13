@@ -5,7 +5,7 @@ import { GitGraphSettingTab } from './settingsTab';
 import type { DiffRequest } from './ui/types';
 import { GitGraphView, VIEW_TYPE_GIT_GRAPH } from './view';
 
-export default class DshGitGraphPlugin extends Plugin {
+export default class VisibleGitGraphPlugin extends Plugin {
   /** Validated settings, kept in sync with the persisted data file. */
   settings: GraphSettings = { ...DEFAULT_SETTINGS };
 

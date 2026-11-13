@@ -1,4 +1,4 @@
-# 任务：从零实现 Obsidian 插件 obsidian-dsh-git-graph
+# 任务：从零实现 Obsidian 插件 Visible Git Graph
 
 > 给 `E:\Code\obsidian-dsh-git-graph`（当前是空目录）里的 agent 使用。
 > 分段执行：每个 Phase 结束都要 `typecheck + test + build` 全绿，并提交一次（中文、可读的提交信息）。

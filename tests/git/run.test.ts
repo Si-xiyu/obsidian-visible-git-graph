@@ -7,7 +7,7 @@ import { GitError, runGit } from '../../src/git/run';
 const tempDirs: string[] = [];
 
 async function makeTempDir(): Promise<string> {
-  const dir = await mkdtemp(join(tmpdir(), 'dsh-git-run-'));
+  const dir = await mkdtemp(join(tmpdir(), 'visible-git-run-'));
   tempDirs.push(dir);
   return dir;
 }

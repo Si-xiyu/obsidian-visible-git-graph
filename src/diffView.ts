@@ -6,7 +6,7 @@ import { GitError } from './git/run';
 import DiffDrawer from './ui/DiffDrawer.vue';
 import type { DiffRequest } from './ui/types';
 
-export const DIFF_VIEW_TYPE = 'dsh-git-diff-view';
+export const DIFF_VIEW_TYPE = 'visible-git-graph-diff-view';
 
 /** Validate a restored view state enough to avoid opening a half-empty tab. */
 function isDiffRequest(value: unknown): value is DiffRequest {
@@ -69,8 +69,8 @@ export class GitDiffView extends ItemView {
   async onOpen(): Promise<void> {
     this.disposed = false;
     this.requestRef.value = this.request;
-    this.contentEl.addClass('dsh-git-graph-diff-view');
-    const container = this.contentEl.createDiv({ cls: 'dsh-git-graph-diff-view-inner' });
+    this.contentEl.addClass('visible-git-graph-diff-view');
+    const container = this.contentEl.createDiv({ cls: 'visible-git-graph-diff-view-inner' });
 
     const diff = shallowRef<FileDiff | null>(null);
     const loading = ref(true);

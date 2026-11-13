@@ -13,7 +13,7 @@ const BASE_DATE = 1_700_000_000;
 const tempDirs: string[] = [];
 
 /** Empty git config files keep the host's global/system configuration out of the tests. */
-const isolatedConfigDir = fs.mkdtempSync(path.join(os.tmpdir(), 'dsh-git-detail-config-'));
+const isolatedConfigDir = fs.mkdtempSync(path.join(os.tmpdir(), 'visible-git-detail-config-'));
 const emptyGitConfig = path.join(isolatedConfigDir, 'gitconfig');
 fs.writeFileSync(emptyGitConfig, '');
 
@@ -56,7 +56,7 @@ function dateEnv(seconds: number): NodeJS.ProcessEnv {
 }
 
 function initRepo(): string {
-  const dir = mkTempDir('dsh-git-detail-repo-');
+  const dir = mkTempDir('visible-git-detail-repo-');
   git(dir, ['init', '-b', 'main']);
   git(dir, ['config', 'user.name', 'Test User']);
   git(dir, ['config', 'user.email', 'test@example.com']);

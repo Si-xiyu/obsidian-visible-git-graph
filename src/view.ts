@@ -5,7 +5,7 @@ import type { GraphSettings } from './settings';
 import type { DiffRequest } from './ui/types';
 import Root from './ui/Root.vue';
 
-export const VIEW_TYPE_GIT_GRAPH = 'dsh-git-graph-view';
+export const VIEW_TYPE_GIT_GRAPH = 'visible-git-graph-view';
 
 export class GitGraphView extends ItemView {
   private vueApp: VueApp | null = null;
@@ -39,7 +39,7 @@ export class GitGraphView extends ItemView {
   }
 
   async onOpen(): Promise<void> {
-    this.contentEl.addClass('dsh-git-graph-view');
+    this.contentEl.addClass('visible-git-graph-view');
     this.mount();
   }
 
@@ -62,7 +62,7 @@ export class GitGraphView extends ItemView {
   }
 
   private mount(): void {
-    const container = this.contentEl.createDiv({ cls: 'dsh-git-graph-root' });
+    const container = this.contentEl.createDiv({ cls: 'visible-git-graph-root' });
     this.rootContainer = container;
 
     // The plugin is desktop-only (manifest `isDesktopOnly`), so the vault

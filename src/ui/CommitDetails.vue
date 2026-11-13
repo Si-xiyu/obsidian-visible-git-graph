@@ -150,7 +150,7 @@ const STATUS_CLASS: Record<FileStatusCode, string> = {
 };
 
 function statusClass(status: FileStatusCode): string {
-  return `dsh-git-graph-status-${STATUS_CLASS[status] ?? 'other'}`;
+  return `visible-git-graph-status-${STATUS_CLASS[status] ?? 'other'}`;
 }
 
 function indent(entry: TreeEntry): string {
@@ -167,56 +167,56 @@ function openEntry(entry: TreeEntry): void {
 </script>
 
 <template>
-  <div class="dsh-git-graph-details" :data-hash="row.hash">
-    <div class="dsh-git-graph-details-summary">
-      <div class="dsh-git-graph-detail-message">{{ meta.message }}</div>
+  <div class="visible-git-graph-details" :data-hash="row.hash">
+    <div class="visible-git-graph-details-summary">
+      <div class="visible-git-graph-detail-message">{{ meta.message }}</div>
 
-      <dl class="dsh-git-graph-detail-meta">
+      <dl class="visible-git-graph-detail-meta">
         <dt>作者</dt>
         <dd>
           {{ meta.author || '—' }}
-          <span v-if="meta.email" class="dsh-git-graph-detail-email">&lt;{{ meta.email }}&gt;</span>
+          <span v-if="meta.email" class="visible-git-graph-detail-email">&lt;{{ meta.email }}&gt;</span>
         </dd>
 
         <dt>提交者</dt>
         <dd>
           {{ meta.committer || '—' }}
-          <span v-if="meta.committerEmail" class="dsh-git-graph-detail-email">
+          <span v-if="meta.committerEmail" class="visible-git-graph-detail-email">
             &lt;{{ meta.committerEmail }}&gt;
           </span>
         </dd>
 
         <dt>日期</dt>
-        <dd class="dsh-git-graph-detail-date">{{ formatDate(meta.authorDate, dateFormat) }}</dd>
+        <dd class="visible-git-graph-detail-date">{{ formatDate(meta.authorDate, dateFormat) }}</dd>
 
         <dt>父提交</dt>
-        <dd class="dsh-git-graph-detail-parents">
+        <dd class="visible-git-graph-detail-parents">
           <template v-if="meta.parents.length > 0">
             <span v-for="parent in meta.parents" :key="parent" :title="parent">
               {{ parent.slice(0, 8) }}
             </span>
           </template>
-          <span v-else class="dsh-git-graph-detail-empty">无（根提交）</span>
+          <span v-else class="visible-git-graph-detail-empty">无（根提交）</span>
         </dd>
 
         <dt>提交</dt>
-        <dd class="dsh-git-graph-detail-hash" :title="row.hash">{{ row.hash }}</dd>
+        <dd class="visible-git-graph-detail-hash" :title="row.hash">{{ row.hash }}</dd>
       </dl>
     </div>
 
-    <div class="dsh-git-graph-files-panel">
-      <div class="dsh-git-graph-files-head">
-      <span class="dsh-git-graph-files-title">变更文件</span>
-      <span v-if="loaded" class="dsh-git-graph-files-count">（{{ files.length }}）</span>
-      <span v-if="loaded" class="dsh-git-graph-files-totals">
-        <span class="dsh-git-graph-add">+{{ totals.additions }}</span>
-        <span class="dsh-git-graph-del">-{{ totals.deletions }}</span>
+    <div class="visible-git-graph-files-panel">
+      <div class="visible-git-graph-files-head">
+      <span class="visible-git-graph-files-title">变更文件</span>
+      <span v-if="loaded" class="visible-git-graph-files-count">（{{ files.length }}）</span>
+      <span v-if="loaded" class="visible-git-graph-files-totals">
+        <span class="visible-git-graph-add">+{{ totals.additions }}</span>
+        <span class="visible-git-graph-del">-{{ totals.deletions }}</span>
       </span>
 
-      <div class="dsh-git-graph-files-toggles" role="group" aria-label="文件列表视图">
+      <div class="visible-git-graph-files-toggles" role="group" aria-label="文件列表视图">
         <button
           type="button"
-          class="dsh-git-graph-files-toggle"
+          class="visible-git-graph-files-toggle"
           :class="{ active: view === 'list' }"
           :aria-pressed="view === 'list'"
           @click="view = 'list'"
@@ -225,7 +225,7 @@ function openEntry(entry: TreeEntry): void {
         </button>
         <button
           type="button"
-          class="dsh-git-graph-files-toggle"
+          class="visible-git-graph-files-toggle"
           :class="{ active: view === 'tree' }"
           :aria-pressed="view === 'tree'"
           @click="view = 'tree'"
@@ -235,18 +235,18 @@ function openEntry(entry: TreeEntry): void {
       </div>
     </div>
 
-    <div v-if="error" class="dsh-git-graph-files-state is-error" role="alert">{{ error }}</div>
-    <div v-else-if="loading" class="dsh-git-graph-files-state" role="status" aria-live="polite">
+    <div v-if="error" class="visible-git-graph-files-state is-error" role="alert">{{ error }}</div>
+    <div v-else-if="loading" class="visible-git-graph-files-state" role="status" aria-live="polite">
       正在读取变更文件…
     </div>
-    <div v-else-if="!loaded" class="dsh-git-graph-files-state">无文件变更</div>
-    <div v-else-if="files.length === 0" class="dsh-git-graph-files-state">无文件变更</div>
+    <div v-else-if="!loaded" class="visible-git-graph-files-state">无文件变更</div>
+    <div v-else-if="files.length === 0" class="visible-git-graph-files-state">无文件变更</div>
 
-    <div v-else class="dsh-git-graph-files">
+    <div v-else class="visible-git-graph-files">
       <template v-for="entry in displayEntries" :key="entry.key">
         <div
           v-if="entry.dir"
-          class="dsh-git-graph-dir"
+          class="visible-git-graph-dir"
           :style="{ paddingLeft: indent(entry) }"
         >
           {{ entry.name }}/
@@ -254,30 +254,30 @@ function openEntry(entry: TreeEntry): void {
         <button
           v-else
           type="button"
-          class="dsh-git-graph-file"
+          class="visible-git-graph-file"
           :style="{ paddingLeft: indent(entry) }"
           :title="entry.file ? fileTitle(entry.file) : entry.name"
           @click="openEntry(entry)"
         >
           <span
-            class="dsh-git-graph-file-status"
+            class="visible-git-graph-file-status"
             :class="entry.file ? statusClass(entry.file.status) : ''"
           >
             {{ entry.file?.status }}
           </span>
-          <span class="dsh-git-graph-file-path">{{ entry.name }}</span>
+          <span class="visible-git-graph-file-path">{{ entry.name }}</span>
           <template v-if="entry.file">
             <span
               v-if="entry.file.binary"
-              class="dsh-git-graph-file-stat dsh-git-graph-file-binary"
+              class="visible-git-graph-file-stat visible-git-graph-file-binary"
             >
               bin
             </span>
             <template v-else>
-              <span class="dsh-git-graph-file-stat dsh-git-graph-add">
+              <span class="visible-git-graph-file-stat visible-git-graph-add">
                 +{{ entry.file.additions }}
               </span>
-              <span class="dsh-git-graph-file-stat dsh-git-graph-del">
+              <span class="visible-git-graph-file-stat visible-git-graph-del">
                 -{{ entry.file.deletions }}
               </span>
             </template>

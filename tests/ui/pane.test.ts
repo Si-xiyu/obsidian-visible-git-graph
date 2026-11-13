@@ -40,8 +40,8 @@ describe('pane header', () => {
     });
     await nextTick();
 
-    expect(host.querySelector('.dsh-gg-repo')?.textContent).toBe('vault');
-    expect(host.querySelector('.dsh-gg-branch')?.textContent).toBe('main');
+    expect(host.querySelector('.vgg-repo')?.textContent).toBe('vault');
+    expect(host.querySelector('.vgg-branch')?.textContent).toBe('main');
 
     const select = host.querySelector('select') as HTMLSelectElement;
     select.value = 'all';
@@ -67,10 +67,10 @@ describe('ref capsule', () => {
     const { host, app } = mount(RefBadge, { badge: tag });
     await nextTick();
 
-    const capsule = host.querySelector('.dsh-gg-ref') as HTMLElement;
+    const capsule = host.querySelector('.vgg-ref') as HTMLElement;
     expect(capsule.dataset.kind).toBe('tag');
     expect(capsule.title).toBe('Tag v1.0.0');
-    expect(capsule.querySelector('.dsh-gg-ref-name')?.textContent).toBe('v1.0.0');
+    expect(capsule.querySelector('.vgg-ref-name')?.textContent).toBe('v1.0.0');
 
     app.unmount();
   });

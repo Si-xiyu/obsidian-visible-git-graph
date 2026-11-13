@@ -421,18 +421,18 @@ onBeforeUnmount(() => {
 </script>
 
 <template>
-  <div class="dsh-git-graph-root-inner">
-    <div v-if="loading" class="dsh-git-graph-loading" role="status" aria-live="polite">loading…</div>
+  <div class="visible-git-graph-root-inner">
+    <div v-if="loading" class="visible-git-graph-loading" role="status" aria-live="polite">loading…</div>
 
-    <div v-else-if="state === 'none'" class="dsh-git-graph-none">当前 vault 不是 git 仓库</div>
+    <div v-else-if="state === 'none'" class="visible-git-graph-none">当前 vault 不是 git 仓库</div>
 
-    <div v-else-if="state === 'error'" class="dsh-git-graph-error" role="alert">
-      <div v-if="errorCode" class="dsh-git-graph-error-code">[{{ errorCode }}]</div>
-      <pre class="dsh-git-graph-error-stderr">{{ errorDetail }}</pre>
-      <button type="button" class="dsh-git-graph-retry" @click="reload">重试</button>
+    <div v-else-if="state === 'error'" class="visible-git-graph-error" role="alert">
+      <div v-if="errorCode" class="visible-git-graph-error-code">[{{ errorCode }}]</div>
+      <pre class="visible-git-graph-error-stderr">{{ errorDetail }}</pre>
+      <button type="button" class="visible-git-graph-retry" @click="reload">重试</button>
     </div>
 
-    <div v-else-if="showTable && model" class="dsh-git-graph-ready">
+    <div v-else-if="showTable && model" class="visible-git-graph-ready">
       <GraphTable
         :model="model"
         :prefs="prefs"

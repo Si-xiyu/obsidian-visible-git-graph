@@ -1,5 +1,5 @@
 import { PluginSettingTab, Setting, type App } from 'obsidian';
-import type DshGitGraphPlugin from './main';
+import type VisibleGitGraphPlugin from './main';
 import { DEFAULT_SETTINGS, type GraphSettings } from './settings';
 
 /**
@@ -10,9 +10,9 @@ import { DEFAULT_SETTINGS, type GraphSettings } from './settings';
  * the pane constantly.
  */
 export class GitGraphSettingTab extends PluginSettingTab {
-  private readonly plugin: DshGitGraphPlugin;
+  private readonly plugin: VisibleGitGraphPlugin;
 
-  constructor(app: App, plugin: DshGitGraphPlugin) {
+  constructor(app: App, plugin: VisibleGitGraphPlugin) {
     super(app, plugin);
     this.plugin = plugin;
   }
@@ -29,8 +29,6 @@ export class GitGraphSettingTab extends PluginSettingTab {
   display(): void {
     const { containerEl } = this;
     containerEl.empty();
-
-    new Setting(containerEl).setName('Git Graph').setHeading();
 
     new Setting(containerEl)
       .setName('Git 可执行文件')
