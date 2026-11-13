@@ -42,11 +42,11 @@ export function buildLayout(commits: ReadonlyArray<Commit>, options: BuildLayout
   const committedAt = (row: number): boolean => commits[row].hash !== UNCOMMITTED;
 
   // ── 每行的列状态 ──────────────────────────────────────────────
-  const nextFree: number[] = Array(count).fill(0);          // 该行最右边已用列之后的第一个空列
-  const laneOf: number[] = Array(count).fill(-1);           // 该行提交落在哪一列
-  const ownerOf: Array<Segment | null> = Array(count).fill(null); // 该行提交由哪条段接管
-  const slotOf: number[] = Array(count).fill(-1);           // 该行颜色槽（-1 = 内部灰）
-  const cursor: number[] = Array(count).fill(0);            // 该行已处理到第几个父提交
+  const nextFree: number[] = Array<number>(count).fill(0);          // 该行最右边已用列之后的第一个空列
+  const laneOf: number[] = Array<number>(count).fill(-1);           // 该行提交落在哪一列
+  const ownerOf: Array<Segment | null> = Array<Segment | null>(count).fill(null); // 该行提交由哪条段接管
+  const slotOf: number[] = Array<number>(count).fill(-1);           // 该行颜色槽（-1 = 内部灰）
+  const cursor: number[] = Array<number>(count).fill(0);            // 该行已处理到第几个父提交
   // links[row][lane] = { to, seg }：这一行这一列上，是否有通向 to 的、属于 seg 的连接点
   const links: RowLinks[] = Array.from({ length: count }, () => []);
   const slotEnd: number[] = [];

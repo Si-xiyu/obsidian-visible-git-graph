@@ -86,12 +86,12 @@ export function watchRepo(repoRoot: string, onChange: () => void): RepoWatcher {
   }
 
   let closed = false;
-  let timer: ReturnType<typeof setTimeout> | null = null;
+  let timer: number | null = null;
   const watchers = new Set<FSWatcher>();
 
   const clearTimer = (): void => {
     if (timer !== null) {
-      clearTimeout(timer);
+      window.clearTimeout(timer);
       timer = null;
     }
   };
@@ -99,8 +99,8 @@ export function watchRepo(repoRoot: string, onChange: () => void): RepoWatcher {
   /** Trailing debounce: every event restarts the 300ms quiet window. */
   const schedule = (): void => {
     if (closed) return;
-    if (timer !== null) clearTimeout(timer);
-    timer = setTimeout(() => {
+    if (timer !== null) window.clearTimeout(timer);
+    timer = window.setTimeout(() => {
       timer = null;
       if (!closed) onChange();
     }, DEBOUNCE_MS);

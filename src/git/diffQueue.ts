@@ -16,7 +16,8 @@ export class DiffQueue {
       const abort = (): void => {
         const index = this.waiting.indexOf(start);
         if (index >= 0) this.waiting.splice(index, 1);
-        reject(signal?.reason);
+        const reason: unknown = signal?.reason;
+        reject(reason instanceof Error ? reason : new Error('The diff request was aborted.'));
       };
       if (this.active < this.limit) start();
       else {

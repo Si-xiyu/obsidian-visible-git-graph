@@ -15,7 +15,8 @@ export default class DshGitGraphPlugin extends Plugin {
   async onload(): Promise<void> {
     // Persisted data is untrusted JSON; normalise once so every consumer sees
     // a complete object with in-range values.
-    this.settings = normalizeSettings(await this.loadData());
+    const stored = (await this.loadData()) as unknown;
+    this.settings = normalizeSettings(stored);
 
     this.registerView(
       VIEW_TYPE_GIT_GRAPH,

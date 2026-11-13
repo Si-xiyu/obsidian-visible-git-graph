@@ -43,10 +43,9 @@ function normalizePageSize(value: unknown): number {
 }
 
 /** Return a fresh, fully valid settings object from persisted data. */
-export function normalizeSettings(
-  data: Partial<GraphSettings> | null | undefined,
-): GraphSettings {
-  const source = data ?? {};
+export function normalizeSettings(data: unknown): GraphSettings {
+  const source: Partial<GraphSettings> =
+    typeof data === 'object' && data !== null ? data : {};
 
   const gitPath =
     typeof source.gitPath === 'string' && source.gitPath.trim() !== ''
