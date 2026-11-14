@@ -45,9 +45,9 @@ export class GitGraphSettingTab extends PluginSettingTab {
             text.setValue(next);
             return;
           }
-          this.persist({ gitPath: next }, () =>
-            text.setValue(this.plugin.settings.gitPath),
-          );
+          this.persist({ gitPath: next }, () => {
+            text.setValue(this.plugin.settings.gitPath);
+          });
         };
 
         text.inputEl.addEventListener('blur', commit);
@@ -76,9 +76,9 @@ export class GitGraphSettingTab extends PluginSettingTab {
             text.setValue(String(this.plugin.settings.pageSize));
             return;
           }
-          this.persist({ pageSize: parsed }, () =>
-            text.setValue(String(this.plugin.settings.pageSize)),
-          );
+          this.persist({ pageSize: parsed }, () => {
+            text.setValue(String(this.plugin.settings.pageSize));
+          });
         };
 
         input.addEventListener('blur', commit);
@@ -122,9 +122,9 @@ export class GitGraphSettingTab extends PluginSettingTab {
             text.setValue(next);
             return;
           }
-          this.persist({ dateFormat: next }, () =>
-            text.setValue(this.plugin.settings.dateFormat),
-          );
+          this.persist({ dateFormat: next }, () => {
+            text.setValue(this.plugin.settings.dateFormat);
+          });
         };
 
         text.inputEl.addEventListener('blur', commit);

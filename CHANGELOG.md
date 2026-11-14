@@ -1,5 +1,17 @@
 # Changelog
 
+## 0.2.2 — 2026-11-14
+
+### 修复
+
+- `minAppVersion` 抬到 1.7.2：`Workspace.revealLeaf` 的 Promise 形态从 1.7.2 开始，修掉社区扫描器的 `no-unsupported-api` error。
+- 设置页的异步保存回调不再把组件的链式返回值当作 Promise 返回。
+- Release 只上传 `manifest.json` / `main.js` / `styles.css` 三件套，并为它们生成 artifact attestation；不再上传 `versions.json` 和 zip。
+
+### 文档
+
+- README 改为英文为主、中文附后，并补充插件访问范围（只运行 `git` 读命令、只读 `.git`、不联网、无遥测）。
+
 ## 0.2.1 — 2026-11-13
 
 ### 修复

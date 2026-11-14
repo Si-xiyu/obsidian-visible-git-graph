@@ -7,12 +7,14 @@ on:
   workflow_dispatch:
     inputs:
       tag:
-        description: 'Existing tag to release (for example 0.1.0)'
+        description: 'Existing tag to release (for example 0.2.2)'
         required: true
         type: string
 
 permissions:
   contents: write
+  id-token: write
+  attestations: write
 
 concurrency:
   group: release-${{ github.ref }}
@@ -88,20 +90,21 @@ jobs:
 
       - name: Stage release files
         shell: bash
-        env:
-          VERSION: ${{ steps.meta.outputs.version }}
         run: |
           set -euo pipefail
           mkdir -p release
           cp manifest.json release/
           cp dist/main.js release/
           cp dist/styles.css release/
-          cp versions.json release/
-          (
-            cd release
-            python3 -c "import sys,zipfile; v=sys.argv[1]; z=zipfile.ZipFile(f'visible-git-graph-{v}.zip','w',zipfile.ZIP_DEFLATED); [z.write(n) for n in ('manifest.json','main.js','styles.css')]; z.close()" "$VERSION"
-          )
           ls -lh release
+
+      - name: Attest release assets
+        uses: actions/attest@v4
+        with:
+          subject-path: |
+            release/main.js
+            release/styles.css
+            release/manifest.json
 
       - name: Create GitHub release
         env:
@@ -114,8 +117,6 @@ jobs:
             release/manifest.json \
             release/main.js \
             release/styles.css \
-            release/versions.json \
-            "release/visible-git-graph-${VERSION}.zip" \
             --title "Visible Git Graph $VERSION" \
             --generate-notes \
             --verify-tag
