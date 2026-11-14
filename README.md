@@ -1,57 +1,110 @@
-# Visible Git Graph
+<p align="center"><strong>Visible Git Graph</strong> is a desktop-only Obsidian plugin that turns your vault's Git history into an interactive commit graph — commits, refs, inline details and file diffs, all in a side pane.</p>
 
-A desktop-only Obsidian plugin that shows your vault's Git history as an interactive commit graph. It is **read-only**: it never commits, checks out, fetches, pulls or pushes.
+<p align="center">
+  <img src="docs/screenshot.png" alt="Visible Git Graph: commit graph with branch and tag refs, inline commit details and changed files" width="92%" />
+</p>
 
-![Commit graph, search and inline details](docs/screenshot.png)
+<p align="center">English | <a href="README.zh.md">简体中文</a></p>
 
-![Diff tab opened from a file row](docs/screenshot-diff.png)
+---
+
+Visible Git Graph reads the repository that contains your vault and draws its history the way VS Code's Source Control graph does. Click a commit to expand its message and changed files in place; click a file to open that commit's diff in a new editor tab.
+
+It is **read-only**. The plugin never commits, checks out, fetches, pulls or pushes, and it makes no network requests.
+
+<p align="center">
+  <img src="docs/screenshot-diff.png" alt="Diff tab opened from a file row: hunks, old and new line numbers, and add/delete highlighting" width="82%" />
+</p>
+
+## Quickstart
+
+### Install with one command
+
+Set `VAULT` to your vault path, then run the whole block. It downloads the three release files into the plugin folder.
+
+**macOS / Linux**
+
+```sh
+VAULT="/path/to/your/vault"
+PLUGIN="$VAULT/.obsidian/plugins/visible-git-graph"
+mkdir -p "$PLUGIN"
+BASE="https://github.com/Si-xiyu/obsidian-visible-git-graph/releases/latest/download"
+for f in main.js manifest.json styles.css; do
+  curl -fL "$BASE/$f" -o "$PLUGIN/$f"
+done
+```
+
+**Windows (PowerShell)**
+
+```powershell
+$Vault  = "C:\path\to\your\vault"
+$Plugin = Join-Path $Vault ".obsidian\plugins\visible-git-graph"
+New-Item -ItemType Directory -Force $Plugin | Out-Null
+$Base   = "https://github.com/Si-xiyu/obsidian-visible-git-graph/releases/latest/download"
+foreach ($f in "main.js", "manifest.json", "styles.css") {
+  Invoke-WebRequest "$Base/$f" -OutFile (Join-Path $Plugin $f)
+}
+```
+
+Then open Obsidian → **Settings → Community plugins**, turn off Restricted mode and enable **Visible Git Graph**. If Obsidian is already running, reload it (**Ctrl/Cmd + R** inside the app) after copying the files.
+
+### Install from the community directory
+
+Once the plugin is listed in the [Obsidian community directory](https://community.obsidian.md/plugins), open **Settings → Community plugins → Browse**, search for **Visible Git Graph**, then choose **Install** and **Enable**.
+
+### Manual install
+
+Download `main.js`, `manifest.json` and `styles.css` from the [latest release](https://github.com/Si-xiyu/obsidian-visible-git-graph/releases/latest) and put them in:
+
+```text
+<vault>/.obsidian/plugins/visible-git-graph/
+```
+
+### Let your agent install it
+
+Paste this into your coding agent (Claude Code, Codex, DSH, …):
+
+```text
+Install the Obsidian plugin "Visible Git Graph" from
+https://github.com/Si-xiyu/obsidian-visible-git-graph into my vault.
+
+1. Use this vault path: <VAULT_PATH>.
+2. Create <VAULT_PATH>/.obsidian/plugins/visible-git-graph/ if it does not exist.
+3. Download the latest release assets:
+   https://github.com/Si-xiyu/obsidian-visible-git-graph/releases/latest/download/main.js
+   https://github.com/Si-xiyu/obsidian-visible-git-graph/releases/latest/download/manifest.json
+   https://github.com/Si-xiyu/obsidian-visible-git-graph/releases/latest/download/styles.css
+4. Verify all three files exist and are non-empty, and that manifest.json contains
+   "id": "visible-git-graph".
+5. Do not modify any other file in the vault. Tell me to enable the plugin in
+   Settings → Community plugins.
+```
+
+Machine-readable install notes for agents: [AGENTS.md](AGENTS.md).
 
 ## Features
 
-- A four-column, left-aligned list — `Graph | Description | Date | Author` — with ref capsules next to the commit node and relative dates.
-- Click a commit to expand its details in place: author and committer, dates, parents, the full message, and the changed files (list/tree toggle, status colours, `+n/-n`). Click it again to collapse.
-- Click a file to open its Git diff in a new editor tab: hunks, old/new line numbers, add/delete backgrounds and virtual scrolling. Opening the same commit and file again reuses the existing tab.
-- The pane refreshes itself when the repository changes (`fs.watch(.git)` with a 300 ms debounce); the watcher stops when the pane closes.
-- Large repositories (more than 1000 rows) render only the visible window plus 20 rows on each side, while the graph stays a single SVG. Expanded details use the engine's `expandedRow` offset.
-- Clear states for "not a repository", "git not found" and command failures. Git's stderr is shown as-is, with a retry button.
+- **Commit graph** — branch-coloured lanes, compact rows and ref capsules for local branches, remote branches, tags and `HEAD`, with relative dates.
+- **Inline commit details** — author, committer, dates, parents and the full message, plus changed files with a list/tree toggle, status colours and `+n/-n` counts.
+- **Diff tab** — click a file to open its diff in a new editor tab: hunks, old/new line numbers, add/delete highlighting and virtual scrolling. The same commit and file reuse the existing tab.
+- **Live refresh** — the pane watches the repository's `.git` directory and refreshes after a 300 ms debounce; the watcher stops when the pane closes.
+- **Large repositories** — beyond 1000 rows only the visible window plus 20 rows on each side is rendered, while the graph stays a single SVG.
+- **Clear failure states** — "not a repository", "git not found" and command failures each show what happened; git's stderr is shown as-is with a retry button.
+
+## Usage
+
+- **Open the pane** — click the Git branch icon in the ribbon, or run **Open Git Graph** from the command palette. It opens in the right sidebar.
+- **Inspect a commit** — click any row to expand its details in place; click it again to collapse. Click a file to open its diff tab.
+- **Filter refs** — `Local` shows local branches and tags; `All` also shows remote-tracking refs.
+- **Search** — filters by description, author, hash or ref; the graph is hidden while filtering.
+- **Load more** — scrolling within 25 px of the bottom loads the next page automatically.
 
 ## Requirements
 
 - Obsidian **1.7.2** or newer, desktop only.
 - `git` installed. If it is not on `PATH`, set the executable in the plugin settings.
 
-## Install
-
-### From a release
-
-1. Download `main.js`, `manifest.json` and `styles.css` from the release.
-2. Create this folder in your vault:
-
-   ```text
-   <vault>/.obsidian/plugins/visible-git-graph/
-   ```
-
-3. Put the three files in that folder.
-4. In Obsidian, open **Settings → Community plugins**, turn off Restricted mode and enable **Visible Git Graph**.
-5. Click the Git branch icon in the ribbon, or run **Open Git Graph** from the command palette.
-
-### From source
-
-```bash
-npm install
-npm run build
-```
-
-The build writes `dist/main.js` and `dist/styles.css`. Copy them together with `manifest.json` into the plugin folder above.
-
-## Usage
-
-- **Open the pane**: the ribbon icon or **Open Git Graph**. It opens in the right sidebar.
-- **Inspect a commit**: click any row to expand its details in place; click it again to collapse. Click a file to open its diff tab.
-- **Filter refs**: `Local` shows local branches and tags; `All` also shows remote-tracking refs.
-- **Search**: filters by description, author, hash or ref (the graph is hidden while filtering).
-- **Load more**: scrolling within 25 px of the bottom loads the next page automatically.
-- **Settings**:
+## Settings
 
 | Setting | Default | Meaning |
 |---|---|---|
@@ -100,65 +153,4 @@ tests/        vitest: engine contract/golden, real git repos, pagination/cache/w
 
 ## License
 
-MIT © 2026 Si-xiyu. Product behaviour and visual layout reference VS Code Git Graph; no code from that project is used. Third-party notices: [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md).
-
----
-
-## 中文
-
-一个**桌面端** Obsidian 插件：在右侧面板显示当前 vault 的 Git 提交图，交互参照 VS Code Git Graph。只读，不做 commit/checkout/fetch/push。
-
-### 功能
-
-- 四列无表头、全部左对齐：`Graph | Description | Date | Author`；refs 胶囊在节点右侧，日期用相对时间。
-- 点击提交在列表内**就地展开**详情：作者/提交者、日期、父提交、完整 message、文件变更（列表/树切换、状态色、`+n/-n`）；再次点击收起。
-- 点击文件在**新的编辑器标签页**打开该文件的 Git diff：hunk、旧/新行号、增删底色、虚拟滚动；同一提交+文件会复用已打开的标签。
-- 右侧面板随仓库变化自动刷新（`fs.watch(.git)` + 300ms 去抖），面板关闭即停止监听。
-- 设置：Git 可执行文件、每页提交数（10–5000）、引用过滤（`local`/`all`）、日期格式。
-- 大仓库（>1000 行）只渲染可视区 ±20 行，图谱仍是单个 SVG；展开详情使用引擎的 `expandedRow` 偏移。
-- 非仓库、git 缺失、命令失败都有明确状态；错误会原样显示 git stderr 并提供重试。
-
-### 安装
-
-从 release 下载 `main.js`、`manifest.json`、`styles.css`，放进 `<vault>/.obsidian/plugins/visible-git-graph/`，然后在「设置 → 第三方插件」中启用 **Visible Git Graph**。
-
-源码构建：`npm install && npm run build`，产物在 `dist/main.js`、`dist/styles.css`。
-
-### 使用
-
-- **打开面板**：ribbon 图标或命令面板里的 `Open Git Graph`。面板默认在右侧栏。
-- **查看提交**：点击任意行，详情就地展开；再次点击同一行可收起。点击文件列表里的文件，会打开一个 diff 标签页。
-- **引用过滤**：顶部 `Local` 只显示本地分支和标签；`All` 还显示远端跟踪引用。
-- **搜索**：搜索框按描述、作者、hash、ref 过滤（过滤时隐藏图谱）。
-- **加载更多**：滚动到列表底部 25px 内自动加载下一页。
-- **设置**：Git 可执行文件、每页提交数（10–5000，默认 200）、引用过滤、日期格式（默认 `DD Mon YYYY HH:mm`）。
-
-### 访问范围
-
-插件只使用桌面端 Node API：用 `execFile` 运行 `git` 的只读命令（`rev-parse`、`log`、`for-each-ref`、`status`、`show`、`diff-tree`），用 `fs` 读取并 watch 仓库的 `.git`；vault 是仓库子目录时 `.git` 在 vault 之外。不写仓库、不联网、无遥测。
-
-### 限制
-
-- 仅桌面端，需要本机 `git`。
-- 只读；diff 只预览文本，二进制文件显示提示。
-- 极端拓扑下布局引擎仍有 O(n²) 风险；超过 1000 行已做行虚拟化。
-- 不包含 Obsidian 端到端自动化测试；手动验收使用隔离测试 vault。
-
-### 发布（维护者）
-
-推送 `x.y.z` 标签会触发 `.github/workflows/release.yml`。标签必须与 `manifest.json` 的 `version` 完全一致、**不带 `v` 前缀**。工作流会执行 `typecheck`、`test`、`build`，然后：
-
-1. 创建 GitHub Release，只附带 `manifest.json`、`main.js`、`styles.css`；
-2. 为这三个文件生成 artifact attestation；
-3. `versions.json` 只留在仓库里，不上传到 release。
-
-```bash
-git tag -a 0.2.2 -m "Visible Git Graph 0.2.2"
-git push origin 0.2.2
-```
-
-也可以在 Actions 页面手动触发 `Release` 并填入一个已存在的 tag。
-
-### 许可
-
-MIT © 2026 Si-xiyu。行为与视觉规范参考 VS Code Git Graph，未使用其代码；第三方声明见 [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md)。
+MIT © 2026 Si-xiyu. Product behaviour and visual layout reference [VS Code Git Graph](https://github.com/mhutchie/vscode-git-graph); no code from that project is used. Third-party notices: [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md).
