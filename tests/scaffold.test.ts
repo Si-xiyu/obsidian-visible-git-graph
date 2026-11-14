@@ -7,7 +7,7 @@ import Root from '../src/ui/Root.vue';
 describe('scaffold', () => {
   it('manifest declares the expected plugin identity', () => {
     expect(manifest.id).toBe('visible-git-graph');
-    expect(manifest.version).toBe('0.2.3');
+    expect(manifest.version).toBe('0.2.4');
     expect(manifest.isDesktopOnly).toBe(true);
   });
 

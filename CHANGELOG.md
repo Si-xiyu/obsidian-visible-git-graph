@@ -1,5 +1,15 @@
 # Changelog
 
+## 0.2.4 — 2026-11-14
+
+### 修复
+
+- 面板不再递归监听整个 `.git`：只监听 `HEAD`、`packed-refs`、`index`、`logs/HEAD` 和 `refs/`。此前读取 `.git/objects` 里的对象会更新 atime（Windows），`fs.watch` 把它当成变化并触发整页重新加载，表现为连续点击提交/文件后面板闪回 Loading。
+
+### 测试
+
+- 新增 watcher 回归测试：`.git/objects` 写入不触发，ref 与 index 写入仍触发。
+
 ## 0.2.3 — 2026-11-14
 
 ### 变更

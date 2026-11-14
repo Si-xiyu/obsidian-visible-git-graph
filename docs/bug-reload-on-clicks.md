@@ -4,6 +4,7 @@
 - 插件版本：Visible Git Graph `0.2.2`
 - 环境：Windows + Obsidian（桌面端）
 - 参考实现：`E:\Code\obsidian-git-graph`（Luis85 obsidian-git-graph 0.4.0，无此问题）
+- 状态：已在 `0.2.4` 修复——`src/graph/watch.ts` 改为只监听 `HEAD`/`packed-refs`/`index`/`logs/HEAD`/`refs/`，不再监听 `.git/objects`，并补充回归测试。
 
 ## 结论（根因）
 

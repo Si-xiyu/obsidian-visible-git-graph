@@ -96,6 +96,50 @@ describe('watchRepo', () => {
     expect(calls).toBeGreaterThanOrEqual(1);
   });
 
+  it('ignores object activity under .git/objects', async () => {
+    root = await mkdtemp(join(tmpdir(), 'visible-git-watch-'));
+    await mkdir(join(root, '.git', 'objects', 'aa'), { recursive: true });
+
+    let calls = 0;
+    watcher = watchRepo(root, () => {
+      calls += 1;
+    });
+
+    // Reading an object updates its atime on Windows and fs.watch reports that
+    // as a change; object files are never a signal that HEAD/refs/index moved.
+    await writeFile(join(root, '.git', 'objects', 'aa', 'bb'), 'object\n');
+    await sleep(450);
+    expect(calls).toBe(0);
+  });
+
+  it('reports a branch ref write', async () => {
+    root = await mkdtemp(join(tmpdir(), 'visible-git-watch-'));
+    await mkdir(join(root, '.git', 'refs', 'heads'), { recursive: true });
+
+    let calls = 0;
+    watcher = watchRepo(root, () => {
+      calls += 1;
+    });
+
+    await writeFile(join(root, '.git', 'refs', 'heads', 'main'), 'abc\n');
+    await sleep(500);
+    expect(calls).toBeGreaterThanOrEqual(1);
+  });
+
+  it('reports an index write', async () => {
+    root = await mkdtemp(join(tmpdir(), 'visible-git-watch-'));
+    await mkdir(join(root, '.git'));
+
+    let calls = 0;
+    watcher = watchRepo(root, () => {
+      calls += 1;
+    });
+
+    await writeFile(join(root, '.git', 'index'), 'index\n');
+    await sleep(450);
+    expect(calls).toBeGreaterThanOrEqual(1);
+  });
+
   it('returns a no-op watcher when the path cannot be watched', async () => {
     root = await mkdtemp(join(tmpdir(), 'visible-git-watch-'));
     let calls = 0;

@@ -57,7 +57,7 @@ foreach ($f in "main.js", "manifest.json", "styles.css") {
 
 - All three files exist and are non-empty.
 - `manifest.json` contains `"id": "visible-git-graph"`, `"isDesktopOnly": true` and a `"version"` that matches the release tag.
-- Approximate sizes for `0.2.3`: `main.js` ~120 KB, `styles.css` ~21 KB.
+- Approximate sizes for `0.2.4`: `main.js` ~120 KB, `styles.css` ~21 KB.
 - The plugin folder name must be exactly `visible-git-graph` (it matches `manifest.json`'s `id`).
 
 ## User action after install
