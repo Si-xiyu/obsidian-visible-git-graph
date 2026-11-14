@@ -10,8 +10,8 @@
 .vgg-view {
   --vgg-row-height: 24px;
   --vgg-gutter: 8px;
-  --vgg-date-column: 130px;
-  --vgg-author-column: 110px;
+  --vgg-date-column: 100px;
+  --vgg-author-column: 90px;
   display: flex;
   flex: 1 1 auto;
   flex-direction: column;
@@ -150,6 +150,7 @@
 .vgg-date {
   flex: 0 0 var(--vgg-date-column);
   overflow: hidden;
+  text-align: right;
   text-overflow: ellipsis;
   color: var(--text-faint);
 }
@@ -157,6 +158,7 @@
 .vgg-author {
   flex: 0 0 var(--vgg-author-column);
   overflow: hidden;
+  text-align: right;
   text-overflow: ellipsis;
   color: var(--text-muted);
 }
